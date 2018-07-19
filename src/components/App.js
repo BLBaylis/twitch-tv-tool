@@ -1,7 +1,8 @@
 import React from 'react';
 import twitch from '../twitch.svg';
 import StreamerSearch from './StreamerSearch';
-import RecommendedStreams from './RecommendedStreams';
+import StreamsGallery from './StreamsGallery';
+import Tabs from './Tabs';
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -12,8 +13,11 @@ class App extends React.Component {
           		<h1 className="app--title">Brad's <img src={twitch} className="app--title__logo" alt="Twitch logo" /> Tool</h1>
         	</header>
         	<StreamerSearch/>
-        	<RecommendedStreams/>
-      	</div>
+        	<section className = "recommended-streams">
+        		<Tabs/>
+        		<StreamsGallery/>
+        	</section>
+        	</div>
     	);
   	}
 }

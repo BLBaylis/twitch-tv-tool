@@ -3,3 +3,13 @@ body, html, .root {
   	padding: 0;
 	height : 100%;
 }
+
+a {
+	display : inline;
+	text-decoration: none;
+	color : black;
+}
+
+a:hover, a:focus {
+	color : #6441a5;
+}

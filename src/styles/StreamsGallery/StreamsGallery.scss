@@ -1,0 +1,31 @@
+@import 'heading';
+@import 'navbar';
+
+.streams-gallery {
+	width : 90%;
+	margin : 0 auto 5%;	
+	color : #fff;
+	border  :none;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background-color : #6441a5;
+}
+
+.streams {	
+	display : flex;
+	flex-flow : row wrap;
+	justify-content : flex-start;
+	align-content : flex-start;
+}
+
+/*.featured {
+	display : none;
+	width : 100%;
+	margin : 0 auto;
+	padding-bottom : 3vh;
+	background-color: #6441a5;
+	border : none;
+}
+
+.show {
+	display : block;
+}*/
