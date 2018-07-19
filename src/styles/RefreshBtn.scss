@@ -1,0 +1,32 @@
+.refresh-btn {
+	margin : 1vh 0;
+	height : calc(34.3px + (8.6 * (100vh - 300px) / 468));
+	width : 90%;
+	font-size: calc(11px + (4 * (100vw - 350px) / 130));
+	background-color : #6441a5;
+	color : #eee;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+	transition : all 300ms ease-in-out;
+	border : none;
+}
+
+.refresh-btn:hover, .refresh-btn:focus {
+	background-color : #956dd7;
+	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+@media (min-width : 480px) {
+	
+	.refresh-btn {
+		font-size : calc(15px + (15 * (100vw - 480px) / 1540));
+	}
+
+}
+
+@media (min-height : 768px){
+
+	.refresh-btn {
+		height : 6%;
+	}
+
+}
