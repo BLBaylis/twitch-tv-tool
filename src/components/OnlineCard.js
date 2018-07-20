@@ -5,17 +5,17 @@ const OnlineCard = (props) => {
 	return (
 		<div className = "online-card">
 			<a className = "online-card--status">
-        		<h3>THIS WILL BE A STREAM TITLE</h3>
+        		<h3>{props.data.streamTitle}</h3>
         	</a>
         	<h4>Currently playing : 
-        		<a>THIS WILL BE A GAME NAME</a>
+        		<a>{props.data.game}</a>
         	</h4>
           	<a className = "online-card--img-link">
-          		<img className = "online-card--img" alt = "Screenshot of stream"></img>
+          		<img className = "online-card--img" src = {props.data.screenshotLink} alt = "Screenshot of stream"></img>
           	</a>
           	<br/>
           	<h4>
-          		<a>THIS WILL CONTAIN VIEWER COUNT AND STREAMER NAME</a>
+          		<a>{props.data.viewerCount + " viewers on " + props.data.streamName}</a>
           	</h4>
          </div>
 	);
