@@ -3,7 +3,7 @@
 	flex-flow : column wrap;
 	text-align : center;
 	width : 90%;
-	margin : 3vh auto;
+	/*margin : 3vh auto;*/
 	background-color : #fff;
 	color : black;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -39,23 +39,7 @@
 @media (min-width: 768px){
 
 	.online-card {
-    	width: 45%;
+    	width: 100%;
 	}
 
-}
-
-@media (min-width : 1000px){
-
-	.online-card {
-		width : 30%;
-	}
-
-}
-
-@media (min-width : 1300px) {
-
-	.online-card {
-		width : 22.5%;
-	}
-	
 }
