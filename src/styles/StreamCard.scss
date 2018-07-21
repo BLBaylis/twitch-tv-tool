@@ -35,6 +35,20 @@
 	border : solid 2px black;
 }
 
+.logo-anchor {
+	display : inline;
+	width: 110px;
+	margin : 0 auto;	
+}
+
+.logo {
+	display : inline;
+	margin : 1vh auto;
+	height : 110px;
+	width: 110px;
+	border : black 2px solid;
+}
+
 @media (min-width: 768px){
 
 	.online-card {
