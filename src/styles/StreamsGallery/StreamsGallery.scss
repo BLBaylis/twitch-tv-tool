@@ -10,36 +10,21 @@
 	background-color : #6441a5;
 }
 
-.streams {	
+.streams--stream {
 	display : grid;
-	grid-template-columns : 1fr;
-	justify-items : center;
 	padding : 3vh;
+	grid-gap : 3vh;
 }
 
-@media (min-width : 768px) {
-	
-	.streams {
-		grid-template-columns : 1fr 1fr;
-		grid-gap : 3vh;
-	}
-
+.streams--stream__online {
+	@extend .streams--stream;
+	grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
+	padding-bottom : 1.5vh;
 }
 
-@media (min-width : 1000px) {
-	
-	.streams {
-		grid-template-columns : 1fr 1fr 1fr;
-		grid-gap : 3vh;
-	}
 
-}
-
-@media (min-width : 1300px) {
-	
-	.streams {
-		grid-template-columns : 1fr 1fr 1fr 1fr;
-		grid-gap : 3vh;
-	}
-
+.streams--stream__offline {
+	@extend .streams--stream;
+	grid-template-columns : repeat(auto-fit, minmax(150px, 0.5fr));
+	padding-top : 1.5vh;
 }

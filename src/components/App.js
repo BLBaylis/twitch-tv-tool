@@ -10,7 +10,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			streams : ["ESL_SC2", "foggedftw2", "loltyler1"],
+			streams : ["foggedftw2", "boxerpete", "neace", "imaqtpie", "loltyler1", "tobiasfate", "karnrs", "hashinshin"],
 			data : []
 		};
 		this.getData = this.getData.bind(this);
@@ -18,15 +18,15 @@ class App extends React.Component {
 	}
 
 	componentDidMount(){
-		this.getData(this.state.streams[0]);
-		this.getData(this.state.streams[1]);
-		this.getData(this.state.streams[2]);
+		for (let i = 0; i < this.state.streams.length; i++){
+			this.getData(this.state.streams[i]);
+		}
 	}
 
 	async getData(streamerName){
 		let response = await fetch("https://wind-bow.glitch.me/twitch-api/streams/" + streamerName);
 		if (response.status !== 200) {
-			console.log('Looks like there was a problem. Status Code: ' + response.status);
+			console.log('Looks like there was a problem. Status Code: ' + response.status + ' for ' + streamerName + ' data');
         	return;
       	}
       	response = await response.json();
@@ -34,7 +34,7 @@ class App extends React.Component {
       		response = await fetch("https://wind-bow.glitch.me/twitch-api/channels/" + streamerName);
       		response = await response.json();
       		if (response.status !== 200 && typeof response.status !== "string"){
-      			console.log('Looks like there was a problem. Status Code: ' + response.status);
+      			console.log('Looks like there was a problem. Status Code: ' + response.status + ' for ' + streamerName + ' data');
         		return;
       		}
       		

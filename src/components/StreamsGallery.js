@@ -8,7 +8,8 @@ class StreamsGallery extends React.Component {
 		this.constructStreams = this.constructStreams.bind(this);
 	}
 
-	constructStreams(data) {
+	constructStreams(data, online) {
+		data = online ? data.filter(x => x.online) : data.filter(x => !x.online);
 		let streams = data.map(x => <StreamCard key = {x.streamName} data = {x} online = {x.online}/>);
 		return streams;
 	}
@@ -22,8 +23,14 @@ class StreamsGallery extends React.Component {
 					<a tabIndex = "0" className = "navbar--btn navbar--btn__active">All</a>
 					<a tabIndex = "0" className = "navbar--btn">Offline</a>
 				</div>
-				<div className = "streams">
-					{this.constructStreams(this.props.data)}
+				<div className = "streams-gallery--streams">
+					<div className = "streams--stream__online">
+						{this.constructStreams(this.props.data, true)}
+					</div>
+					<div className = "streams--stream__offline">
+						{this.constructStreams(this.props.data, false)}
+					</div>
+
 				</div>
 			</div>
 		);
