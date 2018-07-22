@@ -5,11 +5,11 @@ const StreamCard = (props) => {
 	if (props.online === false){
 		return (
 			<div className = "offline-card">
-				<h3>
+				<h3 className = "offline-card--status">
 					<a target = "_blank" rel = "noopener noreferrer" href = {props.data.streamURL}>{props.data.streamName}</a> is offline!
      			</h3>
-     			<a className = "logo-anchor" target = "_blank" rel = "noopener noreferrer" href = {props.data.streamURL}>
-     				<img className = "logo" alt = "logo" src = {props.data.logo}/>
+     			<a className = "offline-card--logo-anchor" target = "_blank" rel = "noopener noreferrer" href = {props.data.streamURL}>
+     				<img className = "offline-card--logo" alt = "logo" src = {props.data.logo}/>
      			</a>
      		</div>
 		);

@@ -11,7 +11,7 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			streams : ["foggedftw2", "boxerpete", "neace", "imaqtpie", "loltyler1", "tobiasfate", "karnrs", "hashinshin"],
-			data : []
+			data : [],
 		};
 		this.getData = this.getData.bind(this);
 		this.sortData = this.sortData.bind(this);
@@ -68,7 +68,9 @@ class App extends React.Component {
     	return (
       		<div className="app">
         		<header className="app--header">
-          			<h1 className="app--title">Brad's <img src={twitch} className="app--title__logo" alt="Twitch logo" /> Tool</h1>
+          			<h1 className="app--title">
+          			Brad's <img src={twitch} className="app--title__logo" alt="Twitch logo" /> Tool
+          			</h1>
         		</header>
         		<StreamerSearch/>
         		<RefreshBtn/>
