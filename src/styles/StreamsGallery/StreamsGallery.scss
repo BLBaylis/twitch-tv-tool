@@ -18,7 +18,7 @@
 
 .streams--stream__online {
 	@extend .streams--stream;
-	grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns : repeat(auto-fit, minmax(240px, 1fr));
 	padding-bottom : 1.5vh;
 }
 

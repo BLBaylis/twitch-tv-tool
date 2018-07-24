@@ -1,4 +1,6 @@
 import React from 'react';
+import sortNonTwitchData, {sortTwitchData} from '../sortFunctions';
+import fetchData from '../fetchData';
 import twitch from '../twitch.svg';
 import StreamerSearch from './StreamerSearch';
 import RefreshBtn from './RefreshBtn';
@@ -19,26 +21,23 @@ class App extends React.Component {
 				twitch : [], 
 				fcc : []
 			},
-			currentData : "fcc",
+			currentData : "FCC",
 			hideNavbar : false,
 			filters : {
 				online: true, 
 				offline : true
 			}
 		};
-		this.getSingleStreamData = this.getSingleStreamData.bind(this);
-		this.sortData = this.sortData.bind(this);
-		this.getAllData = this.getAllData.bind(this);
-		this.tabsHandler = this.tabsHandler.bind(this);
 		this.getTwitchData = this.getTwitchData.bind(this);
-		this.sortIndividualTwitchData = this.sortIndividualTwitchData.bind(this);
+		this.getNonTwitchData = this.getNonTwitchData.bind(this);
+		this.getAllData = this.getAllData.bind(this);
+		this.getAllNonTwitchData = this.getAllNonTwitchData.bind(this);
+		this.tabsHandler = this.tabsHandler.bind(this);
 		this.updateFilters = this.updateFilters.bind(this);
 	}
 
 	componentDidMount(){
-		this.getAllData("fcc");
-		this.getAllData("brad");
-		this.getTwitchData();
+		this.getAllData();
 	}
 
 	updateFilters(streamType){
@@ -61,7 +60,7 @@ class App extends React.Component {
 		document.getElementsByClassName("tab-navbar--tab__active")[0].classList.remove("tab-navbar--tab__active");
 		target.classList.add("tab-navbar--tab__active");
 		this.setState({currentData : target.classList[0]});
-		if (target.classList[0] === "twitch"){
+		if (target.classList[0] === "Twitch"){
 			this.setState({hideNavbar : true});
 			this.updateFilters("All");
 		} else {
@@ -70,79 +69,42 @@ class App extends React.Component {
 	}
 
 	async getTwitchData() {
-		let response = await fetch("https://wind-bow.glitch.me/twitch-api/streams/featured");
-		if (response.status !== 200) {
-			console.log('Looks like there was a problem. Status Code: ' + response.status + ' for Twitch Featured data');
-        	return;
-      	}
-      	response = await response.json();
-      	response = response.featured;
-      	for (let i = 0; i < response.length; i++){
-      		let sortedData = this.sortIndividualTwitchData(response[i]);
+		let data = await fetchData("/streams", "/featured");
+		console.log(data);
+		for (let i = 0; i < data.featured.length; i++){
+      		let sortedData = sortTwitchData(data.featured[i]);
       		const oldData = this.state.data;
         	oldData["twitch"].push(sortedData);
         	const newData = oldData;
         	this.setState({data : newData});
       	}
+      	console.log(this.state.data);
 	}
 
-	sortIndividualTwitchData(data) {
-		return {
-			streamName : data.stream.channel.display_name,
-			streamTitle : data.stream.channel.status,
-			game : data.stream.channel.game,
-			screenshotLink : data.stream.preview.medium,
-			streamURL: data.stream.channel.url,
-			viewerCount : data.stream.viewers,
-			online : true
-		}
-	}
-
-	getAllData(recommendedBy) {
-		for (let i = 0; i < this.state.streams[recommendedBy].length; i++){
-			this.getSingleStreamData(this.state.streams[recommendedBy][i], recommendedBy);
-		}
-	}
-
-	async getSingleStreamData(streamerName, recommendedBy){
-		let response = await fetch("https://wind-bow.glitch.me/twitch-api/streams/" + streamerName);
-		if (response.status !== 200) {
-			console.log('Looks like there was a problem. Status Code: ' + response.status + ' for ' + streamerName + ' data');
-        	return;
+	async getNonTwitchData(streamerName, recommendedBy) {
+		let data =  await fetchData("/streams", "/" + streamerName);
+		if (data.stream === null) {
+      		data = await fetchData("/channels", "/" + streamerName);
+      		/*Run a check for if the fetch was successful, maybe status before json()?*/     		
       	}
-      	response = await response.json();
-      	if (response.stream === null) {
-      		response = await fetch("https://wind-bow.glitch.me/twitch-api/channels/" + streamerName);
-      		response = await response.json();
-      		if (response.status !== 200 && typeof response.status !== "string"){
-      			console.log('Looks like there was a problem. Status Code: ' + response.status + ' for ' + streamerName + ' data');
-        		return;
-      		}
-      		
-      	}
-      	const sortedData = this.sortData(response);
+      	const sortedData = sortNonTwitchData(data);
         const oldData = this.state.data;
         oldData[recommendedBy].push(sortedData);
         const newData = oldData;
         this.setState({data : newData});
 	}
 
-	sortData(data) {
-		const sortedData = data.stream !== null && data.stream !== undefined ? {
-			streamName : data.stream.channel.display_name,
-			streamTitle : data.stream.channel.status,
-			game : data.stream.channel.game,
-			screenshotLink : data.stream.preview.medium,
-			streamURL: data.stream.channel.url,
-			viewerCount : data.stream.viewers,
-			online : true
-		} : {
-			streamName : data.display_name,
-			logo : data.logo,
-			streamURL: data.url,
-			online : false
-		};
-		return sortedData;
+	getAllData() {
+		this.getAllNonTwitchData("fcc")
+		this.getAllNonTwitchData("brad");
+		this.getTwitchData();
+	}
+
+
+	getAllNonTwitchData(recommendedBy) {
+		for (let i = 0; i < this.state.streams[recommendedBy].length; i++){
+			this.getNonTwitchData(this.state.streams[recommendedBy][i], recommendedBy);
+		}
 	}
 
   	render() {
@@ -162,7 +124,8 @@ class App extends React.Component {
         					filters : this.state.filters
         				}} 
         				navbar = {this.state.hideNavbar} 
-        				data = {this.state.data[this.state.currentData]}
+        				data = {this.state.data[this.state.currentData.toLowerCase()]}
+        				currentData = {this.state.currentData}
         			/>
         		</section>
         	</div>
