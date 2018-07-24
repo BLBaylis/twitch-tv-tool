@@ -1,5 +1,6 @@
 .refresh-btn {
-	margin : 1vh 0;
+	display : block;
+	margin : 1vh auto;
 	height : calc(34.3px + (8.6 * (100vh - 300px) / 468));
 	width : 90%;
 	font-size: calc(11px + (4 * (100vw - 350px) / 130));

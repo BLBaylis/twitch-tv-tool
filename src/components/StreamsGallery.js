@@ -12,7 +12,7 @@ class StreamsGallery extends React.Component {
 
 	constructStreams(data, online) {
 		data = online ? data.filter(x => x.online) : data.filter(x => !x.online);
-		let streams = data.map(x => <StreamCard key = {x.streamName} data = {x} online = {x.online}/>);
+		let streams = data.map(x => <StreamCard search = {false} key = {x.streamName} data = {x} online = {x.online}/>);
 		return streams;
 	}
 
