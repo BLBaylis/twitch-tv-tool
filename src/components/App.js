@@ -70,6 +70,7 @@ class App extends React.Component {
 
 	async getTwitchData() {
 		let data = await fetchData("/streams", "/featured");
+		console.log(data);
 		for (let i = 0; i < data.featured.length; i++){
       		let sortedData = sortTwitchData(data.featured[i]);
       		const oldData = this.state.data;
@@ -77,6 +78,7 @@ class App extends React.Component {
         	const newData = oldData;
         	this.setState({data : newData});
       	}
+      	console.log(this.state.data);
 	}
 
 	async getNonTwitchData(streamerName, recommendedBy) {

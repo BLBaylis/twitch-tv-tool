@@ -28,11 +28,3 @@
 	grid-template-columns : repeat(auto-fit, minmax(200px, 0.5fr));
 	padding-top : 1.5vh;
 }
-
-@media (min-width : 768px) {
-	
-	.streams--stream__online {
-		grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
-	}
-
-}
