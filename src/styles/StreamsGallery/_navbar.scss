@@ -1,0 +1,41 @@
+.streams-gallery--navbar {
+	display : flex;
+	flex-flow : row nowrap;
+	justify-content : space-around;
+	height : calc(34.3px + (8.6 * (100vh - 300px) / 468));
+	width : 100%;
+	background-color: #6441a5;
+	margin : 4vh auto 0;
+}
+
+.navbar--btn {
+	background-color : #6441a5;
+	color : #fff;
+	height : 100%;
+	width : 30%;
+	border : none;
+	text-decoration : none;
+	line-height : calc(34.3px + (8.6 * (100vh - 300px) / 468));
+	font-size : 25px;
+	cursor : pointer;
+	padding : 0 10px;
+	transition : all 300ms ease-in-out;
+	border-radius : 25px;
+}
+
+.navbar--btn:hover {
+	background-color : #956dd7;
+	color : #fff;
+}
+
+.navbar--btn:focus {
+	color : black;
+	background-color : #fff;
+	border-radius : 25px;
+}
+
+.navbar--btn__active {
+	color : black;
+	background-color : #fff;
+	width : 40%;
+}
