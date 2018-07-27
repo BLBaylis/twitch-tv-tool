@@ -2,38 +2,45 @@
 @import 'navbar';
 
 .streams-gallery {
-	width : 95%;
-	min-width : 288px;
-	margin : 0 auto 5%;	
-	color : #fff;
-	border  :none;
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-	background-color : #6441a5;
+	width           : 95%;
+	min-width       : 288px;
+	margin          : 0 auto 5%;	
+	color           : #fff;
+	border          : none;
+	box-shadow      : 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background-color: #6441a5;
 }
 
 .streams--stream {
 	display : grid;
 	padding : 10px;
-	grid-gap : 10px;
+	grid-gap: 10px;
+}
+
+.streams--stream__all {
+	@extend .streams--stream;
+	grid-auto-flow        : row dense;
+	grid-template-columns : minmax(240px, 1fr);
+	grid-auto-rows        : 200px;
 }
 
 .streams--stream__online {
 	@extend .streams--stream;
 	grid-template-columns : minmax(240px, 1fr);
-	/*grid-template-columns : repeat(auto-fit, minmax(240px, 1fr));
-	padding-bottom : 1.5vh;*/
 }
-
 
 .streams--stream__offline {
 	@extend .streams--stream;
 	grid-template-columns : minmax(150px, 1fr);
-	padding-top : 1.5vh;
 }
 
 @media (min-width : 360px) {
 	
 	.streams--stream__offline {
+		grid-template-columns : repeat(2, minmax(150px, 1fr));
+	}
+
+	.streams--stream__all {
 		grid-template-columns : repeat(2, minmax(150px, 1fr));
 	}
 
@@ -45,7 +52,7 @@
 		grid-template-columns : repeat(2, minmax(300px, 1fr));
 	}
 
-	.streams--stream__offline {
+	.streams--stream__offline, .streams--stream__all {
 		grid-template-columns : repeat(3, minmax(150px, 1fr));
 	}
 
@@ -57,7 +64,7 @@
 		grid-template-columns : repeat(3, minmax(300px, 1fr));
 	}
 
-	.streams--stream__offline {
+	.streams--stream__offline, .streams--stream__all {
 		grid-template-columns : repeat(4, minmax(150px, 1fr));
 	}
 
@@ -69,7 +76,7 @@
 		grid-template-columns : repeat(4, minmax(300px, 1fr));
 	}
 
-	.streams--stream__offline {
+	.streams--stream__offline, .streams--stream__all {
 		grid-template-columns : repeat(5, minmax(150px, 1fr));
 	}
 
@@ -81,7 +88,7 @@
 		grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
 	}
 
-	.streams--stream__offline {
+	.streams--stream__offline, .streams--stream__all {
 		grid-template-columns : repeat(auto-fit, minmax(150px, 1fr));
 	}
 

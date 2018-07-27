@@ -23,36 +23,22 @@ class App extends React.Component {
 			},
 			currentData : "FCC",
 			hideNavbar : false,
-			filters : {
-				online: true, 
-				offline : true
-			}
+			filter : "All"
 		};
 		this.getTwitchData = this.getTwitchData.bind(this);
 		this.getNonTwitchData = this.getNonTwitchData.bind(this);
 		this.getAllData = this.getAllData.bind(this);
 		this.getAllNonTwitchData = this.getAllNonTwitchData.bind(this);
 		this.tabsHandler = this.tabsHandler.bind(this);
-		this.updateFilters = this.updateFilters.bind(this);
+		this.updateFilter = this.updateFilter.bind(this);
 	}
 
 	componentDidMount(){
 		this.getAllData();
 	}
 
-	updateFilters(streamType){
-		const filterUpdater = this.state.filters;
-		if (streamType === "All") {
-			filterUpdater.online = true;
-			filterUpdater.offline = true;
-		} else if (streamType === "Online"){
-			filterUpdater.online = true;
-			filterUpdater.offline = false;
-		} else {
-			filterUpdater.online = false;
-			filterUpdater.offline = true;
-		}	
-		this.setState({filters : filterUpdater});
+	updateFilter(streamType){	
+		this.setState({filter : streamType});
 	}
 
 	tabsHandler(event) {
@@ -62,7 +48,7 @@ class App extends React.Component {
 		this.setState({currentData : target.classList[0]});
 		if (target.classList[0] === "Twitch"){
 			this.setState({hideNavbar : true});
-			this.updateFilters("All");
+			this.updateFilter("All");
 		} else {
 			this.setState({hideNavbar : false});
 		}
@@ -118,8 +104,8 @@ class App extends React.Component {
         		<section className = "recommended-streams">
         			<Tabs handler = {this.tabsHandler}/>
         			<StreamsGallery 
-        				filterObj = {{updateFilters : this.updateFilters,
-        					filters : this.state.filters
+        				filterObj = {{updateFilter : this.updateFilter,
+        					filter : this.state.filter
         				}} 
         				navbar = {this.state.hideNavbar} 
         				data = {this.state.data[this.state.currentData.toLowerCase()]}

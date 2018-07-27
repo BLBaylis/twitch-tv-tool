@@ -12,7 +12,7 @@ class StreamsGallery extends React.Component {
 
 	constructStreams(data, online) {
 		data = online ? data.filter(x => x.online) : data.filter(x => !x.online);
-		let streams = data.map(x => <StreamCard search = {false} key = {x.streamName} data = {x} online = {x.online}/>);
+		let streams = data.map(x => <StreamCard filter = {this.props.filterObj.filter.toLowerCase()} search = {false} key = {x.streamName} data = {x} online = {x.online}/>);
 		return streams;
 	}
 
@@ -20,12 +20,11 @@ class StreamsGallery extends React.Component {
 		const target = event.target;
 		document.getElementsByClassName("navbar--btn__active")[0].classList.remove("navbar--btn__active");
 		target.classList.add("navbar--btn__active");
-		this.props.filterObj.updateFilters(target.innerText);
+		this.props.filterObj.updateFilter(target.innerText);
 	}
 
 	render() {
-		let renderOnlineStreams = this.props.filterObj.filters.online ? this.constructStreams(this.props.data, true) : null;
-		let renderOfflineStreams = this.props.filterObj.filters.offline ? this.constructStreams(this.props.data, false) : null;
+		let twitchTest = this.props.currentData === "Twitch";
 		let renderNavbar = this.props.navbar ? null : 
 		(<div className = "streams-gallery--navbar">
 			<NavbarButton buttonText = "Online" handler = {this.navbarHandler} className = "navbar--btn"/>
@@ -37,12 +36,16 @@ class StreamsGallery extends React.Component {
 				<h2 className = "streams-gallery--heading">{this.props.currentData + "'s Recommended Streams"}</h2>
 				{renderNavbar}
 				<div className = "streams-gallery--streams">
-					<div className = "streams--stream__online">
-						{renderOnlineStreams}
-					</div>
-					<div className = "streams--stream__offline">
-						{renderOfflineStreams}
-					</div>
+					{(!twitchTest && this.props.filterObj.filter === "All") && <div className = "streams--stream__all">
+						{this.constructStreams(this.props.data, true)}
+						{this.constructStreams(this.props.data, false)}
+					</div>}
+				{(this.props.filterObj.filter === "Online" || twitchTest) && <div className = "streams--stream__online">
+					{this.constructStreams(this.props.data, true)}
+				</div>}
+					{this.props.filterObj.filter === "Offline" && <div className = "streams--stream__offline">
+						{this.constructStreams(this.props.data, false)}
+					</div>}
 				</div>
 			</div>
 		);
