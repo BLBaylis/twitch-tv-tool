@@ -2,7 +2,8 @@
 @import 'navbar';
 
 .streams-gallery {
-	width : 90%;
+	width : 95%;
+	min-width : 288px;
 	margin : 0 auto 5%;	
 	color : #fff;
 	border  :none;
@@ -12,8 +13,8 @@
 
 .streams--stream {
 	display : grid;
-	padding : 3vh;
-	grid-gap : 3vh;
+	padding : 10px;
+	grid-gap : 10px;
 }
 
 .streams--stream__online {
@@ -25,8 +26,6 @@
 
 .streams--stream__offline {
 	@extend .streams--stream;
-	grid-template-columns : repeat(auto-fit, minmax(200px, 0.5fr));
-	padding-top : 1.5vh;
 }
 
 @media (min-width : 768px) {
