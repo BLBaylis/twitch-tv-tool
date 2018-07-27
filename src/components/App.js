@@ -14,7 +14,7 @@ class App extends React.Component {
 		this.state = {
 			streams : {
 				brad : ["foggedftw2", "boxerpete", "neace", "imaqtpie", "loltyler1", "tobiasfate", "karnrs", "hashinshin", "IWillDominate"],
-				fcc : ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
+				fcc : ["foggedftw2", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
 			},
 			data : {
 				brad : [],
