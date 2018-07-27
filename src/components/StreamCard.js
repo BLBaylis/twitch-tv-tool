@@ -2,9 +2,10 @@ import React from 'react';
 import '../styles/StreamCard.scss'
 
 const StreamCard = (props) => {
+	let filter = props.twitch ? "online" : props.filter;
 	if (props.online === false){
 		return (
-			<div className = {"offline-card--outer offline-card--outer__" + props.filter}>
+			<div className = {"offline-card--outer offline-card--outer__" + filter}>
 				{props.search === "search" ? <button onClick = {props.close} className = {props.data.streamName + " offline-card--close"}>&times;</button> : null}
 				<div className = {"offline-card--inner offline-card--inner__" + props.search}>
 					<h3 className = "offline-card--status">
@@ -18,7 +19,7 @@ const StreamCard = (props) => {
 		);
 	} else {
 		return (
-			<div className = {"online-card--outer online-card--outer__" + props.filter}>
+			<div className = {"online-card--outer online-card--outer__" + filter}>
 				{props.search === "search" ? <button onClick = {props.close} className = {props.data.streamName + " online-card--close"}>&times;</button> : null}
 				<div className = {"online-card--inner online-card--inner__" + props.search}>
 					<a className = "online-card--status" target = "_blank" rel = "noopener noreferrer" href = {props.data.streamURL}>
