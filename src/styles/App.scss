@@ -1,11 +1,11 @@
 .app {
-  	text-align: center;
- 	margin: 0;
-  	padding: 0;
-	height : 100%;
-	background-color : #fff;
-	font-family : /*'Roboto',*/ sans-serif;
-	min-width : 300px;
+	text-align: center;
+	margin          : 0;
+	padding         : 0;
+	height          : 100%;
+	background-color: #fff;
+	font-family     : /*'Roboto',*/ sans-serif;
+	min-width       : 300px;
 }
 
 .app--header {
@@ -13,10 +13,10 @@
 }
 
 .app--title {
-  	font-family: 'Press Start 2P', cursive;
-	font-size : 35px;
-	margin : 3vh auto;
-	color : #6441a5;
+	font-family: 'Press Start 2P', cursive;
+	font-size  : 35px;
+	margin     : 3vh auto;
+	color      : #6441a5;
 }
 
 .app--title__logo {

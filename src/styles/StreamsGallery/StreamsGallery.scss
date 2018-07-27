@@ -21,7 +21,6 @@
 	@extend .streams--stream;
 	grid-auto-flow        : row dense;
 	grid-template-columns : minmax(240px, 1fr);
-	grid-auto-rows        : 200px;
 }
 
 .streams--stream__online {

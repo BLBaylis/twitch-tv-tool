@@ -1,19 +1,19 @@
 .streamer-search {
-	width : 95%;
-	margin : 1vh auto 1vh;
-	border : none;
-	background-color : #fff;
+	width           : 95%;
+	margin          : 1vh auto 1vh;
+	border          : none;
+	background-color: #fff;
 }
 
 .streamer-search--search-bar {
-	display : block;
-	height : 45px;
-	box-sizing : border-box;
-	width : 100%;
-	padding : 0 21px;
+	display   : block;
+	height    : 45px;
+	box-sizing: border-box;
+	width     : 100%;
+	padding   : 0 21px;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-	transition : box-shadow 300ms ease-in-out;
-	border : none;
+	transition: box-shadow 300ms ease-in-out;
+	border    : none;
 	font-size : 18px;
 }
 
@@ -22,33 +22,53 @@
 }
 
 .streamer-search--search-results {
-	width : 100%;
-	background-color : #6441a5;
-	margin : 1vh auto;
-	box-sizing : border-box;
-	padding : 3vh;
+	display              : grid;
+	padding              : 10px;
+	grid-gap             : 10px;
+	width                : 100%;
+	background-color     : #6441a5;
+	margin               : 1vh auto;
+	box-sizing           : border-box;
+	grid-auto-flow       : row dense;
+	grid-template-columns: minmax(240px, 1fr);
 }
 
-.search-result-section__online {
-	display : grid;
-	grid-gap : 3vh;
-	width : 100%;
-	grid-template-columns : repeat(auto-fit, minmax(240px, 1fr));
-	padding-bottom : 1.5vh;
-}
-
-.search-result-section__offline {
-	display : grid;
-	grid-gap : 3vh;
-	width : 100%;
-	grid-template-columns : repeat(auto-fit, minmax(200px, 0.5fr));
-	padding-top : 1.5vh;
-}
-
-@media (min-width : 768px) {
+@media (min-width : 360px) {
 	
-	.search-result-section__online {
-		grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
+	.streamer-search--search-results {
+		grid-template-columns : repeat(2, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 680px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(3, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1000px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(4, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1450px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(5, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1600px) {
+	
+	.streamer-search--search-results {
+		grid-template-columns : repeat(auto-fit, minmax(150px, 1fr));
 	}
 
 }

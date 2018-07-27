@@ -13,24 +13,24 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			streams : {
-				brad : ["foggedftw2", "boxerpete", "neace", "imaqtpie", "loltyler1", "tobiasfate", "karnrs", "hashinshin", "IWillDominate"],
-				fcc : ["foggedftw2", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
+				brad: ["foggedftw2", "boxerpete", "neace", "imaqtpie", "loltyler1", "tobiasfate", "karnrs", "hashinshin", "IWillDominate"],
+				fcc : ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
 			},
-			data : {
-				brad : [],
-				twitch : [], 
-				fcc : []
+			data : {      
+				brad  : [],
+				twitch: [], 
+				fcc   : []
 			},
-			currentData : "FCC",
+			currentData: "FCC",
 			hideNavbar : false,
-			filter : "All"
+			filter     : "All"
 		};
-		this.getTwitchData = this.getTwitchData.bind(this);
-		this.getNonTwitchData = this.getNonTwitchData.bind(this);
-		this.getAllData = this.getAllData.bind(this);
+		this.getTwitchData       = this.getTwitchData.bind(this);
+		this.getNonTwitchData    = this.getNonTwitchData.bind(this);
+		this.getAllData          = this.getAllData.bind(this);
 		this.getAllNonTwitchData = this.getAllNonTwitchData.bind(this);
-		this.tabsHandler = this.tabsHandler.bind(this);
-		this.updateFilter = this.updateFilter.bind(this);
+		this.tabsHandler         = this.tabsHandler.bind(this);
+		this.updateFilter        = this.updateFilter.bind(this);
 	}
 
 	componentDidMount(){

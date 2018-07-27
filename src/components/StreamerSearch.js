@@ -40,7 +40,7 @@ class StreamerSearch extends React.Component {
 
 	constructStreams(data, online) {
 		data = online ? data.filter(x => x.online) : data.filter(x => !x.online);
-		let streams = data.map(x => <StreamCard close = {this.closeStream} filter = {"all"} search = {true} key = {x.streamName} data = {x} online = {x.online}/>);
+		let streams = data.map(x => <StreamCard close = {this.closeStream} filter = {"all"} search = {"search"} key = {x.streamName} data = {x} online = {x.online}/>);
 		return streams;
 	}
 
@@ -51,12 +51,8 @@ class StreamerSearch extends React.Component {
 	render(){
 		const searchResults = this.state.data.length > 0 ? (
 			<div className = "streamer-search--search-results">
-				<div className = "search-result-section__online">
-					{this.constructStreams(this.state.data, true)}
-				</div>
-				<div className = "search-result-section__offline">
-					{this.constructStreams(this.state.data, false)}
-				</div>
+				{this.constructStreams(this.state.data, true)}
+				{this.constructStreams(this.state.data, false)}
 			</div>) : null;
 		return (
 			<section className = "streamer-search">
