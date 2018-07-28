@@ -1,13 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto');
+
 body, html, .root {
 	margin: 0;
-  	padding: 0;
+	padding: 0;
 	height : 100%;
+	font-family : "Roboto", sans-serif;
 }
 
 a {
-	display : inline;
+	display        : inline;
 	text-decoration: none;
-	color : black;
+	color          : black;
 }
 
 a:hover, a:focus {

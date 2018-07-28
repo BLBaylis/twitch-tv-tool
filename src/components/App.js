@@ -79,6 +79,11 @@ class App extends React.Component {
 	}
 
 	getAllData() {
+		this.setState({data : {      
+				brad  : [],
+				twitch: [], 
+				fcc   : []
+			}});
 		this.getAllNonTwitchData("fcc")
 		this.getAllNonTwitchData("brad");
 		this.getTwitchData();
@@ -100,7 +105,7 @@ class App extends React.Component {
           			</h1>
         		</header>
         		<StreamerSearch/>
-        		<RefreshBtn/>
+        		<RefreshBtn refresh = {this.getAllData}/>
         		<section className = "recommended-streams">
         			<Tabs handler = {this.tabsHandler}/>
         			<StreamsGallery 
