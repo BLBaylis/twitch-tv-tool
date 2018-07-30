@@ -21,7 +21,8 @@ class App extends React.Component {
 				twitch: [], 
 				fcc   : []
 			},
-			currentData : "FCC"
+			currentData : "FCC",
+			retrievingData : false
 		};
 		this.getTwitchData       = this.getTwitchData.bind(this);
 		this.getNonTwitchData    = this.getNonTwitchData.bind(this);
@@ -84,16 +85,19 @@ class App extends React.Component {
 		}
 	}
 
-	getAllData() {
+	async getAllData() {
+		if (this.state.retrievingData === true){
+			return;
+		}
 		this.setState({data : {      
 				brad  : [],
 				twitch: [], 
 				fcc   : []
-			}
+			},
+			retrievingData : true
 		});
-		this.getAllNonTwitchData("fcc")
-		this.getAllNonTwitchData("brad");
-		this.getTwitchData();
+		await Promise.all([this.getAllNonTwitchData("fcc"), this.getAllNonTwitchData("brad"), this.getTwitchData()]);
+		this.setState({retrievingData : false});
 	}
 
   	render() {
