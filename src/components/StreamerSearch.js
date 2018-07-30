@@ -35,15 +35,15 @@ class StreamerSearch extends React.Component {
   				return;
   			}
   		}
-  		let data = this.state.data;
-  		data.push(sortNonTwitchData(search));
-  		this.setState({data, input : ""});
+  		let newData = Object.assign({}, this.state.data);
+  		newData.push(sortNonTwitchData(search));
+  		this.setState({data : newData, input : ""});
 
 	}
 
 	closeStream(event) {
 		const target = event.target;
-		let data = this.state.data;
+		let data = Object.assign({}, this.state.data);
 		data = data.filter(x => x.streamName !== target.classList[0]);
 		this.setState({data});
 	}
