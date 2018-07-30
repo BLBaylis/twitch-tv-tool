@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/StreamerSearch.scss';
 import fetchData from '../fetchData';
-import sortNonTwitchData from '../sortFunctions';
+import sortNonTwitchData from '../sortNonTwitchData';
 import StreamCard from './StreamCard';
 
 class StreamerSearch extends React.Component {
@@ -18,12 +18,22 @@ class StreamerSearch extends React.Component {
 
 	async getSearchedStream(event) {
 		const target = event.target;
-  		if (event.keyCode !== 13){
- 			return;
+		if (event.keyCode !== 13){
+			return;
+		}
+  		const streamNames = this.state.data.map(x => x.streamName);
+  		if (streamNames.indexOf(target.value.toLowerCase()) !== -1){
+  			this.setState({input : ""});
+  			return;
   		}
   		let search = await fetchData("/streams", "/" + target.value);
   		if (search.stream === null) {
   			search = await fetchData("/channels", "/" + target.value);
+  			if (search === false){
+  				console.log(target.value + " not found");
+  				this.setState({input : ""});
+  				return;
+  			}
   		}
   		let data = this.state.data;
   		data.push(sortNonTwitchData(search));
@@ -40,7 +50,14 @@ class StreamerSearch extends React.Component {
 
 	constructStreams(data, online) {
 		data = online ? data.filter(x => x.online) : data.filter(x => !x.online);
-		let streams = data.map(x => <StreamCard close = {this.closeStream} filter = {"all"} search = {"search"} key = {x.streamName} data = {x} online = {x.online}/>);
+		let streams = data.map(x => <StreamCard 
+			close = {this.closeStream} 
+			filter = {"all"} 
+			search = {"search"} 
+			key = {x.streamName} 
+			data = {x} 
+			online = {x.online}
+		/>);
 		return streams;
 	}
 
@@ -60,8 +77,8 @@ class StreamerSearch extends React.Component {
 				className = "streamer-search--search-bar" 
 				onChange = {this.updateInput}
 				onKeyUp = {this.getSearchedStream} 
-				type = "text" 
-				placeholder = "Search"
+				type = "search" 
+				placeholder = "Search for a streamer..."
 				value = {this.state.input}
 				/>
 				{searchResults}

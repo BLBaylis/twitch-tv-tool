@@ -1,5 +1,5 @@
 import React from 'react';
-import sortNonTwitchData, {sortTwitchData} from '../sortFunctions';
+import sortNonTwitchData from '../sortNonTwitchData';
 import fetchData from '../fetchData';
 import twitch from '../twitch.svg';
 import StreamerSearch from './StreamerSearch';
@@ -21,24 +21,17 @@ class App extends React.Component {
 				twitch: [], 
 				fcc   : []
 			},
-			currentData: "FCC",
-			hideNavbar : false,
-			filter     : "All"
+			currentData : "FCC"
 		};
 		this.getTwitchData       = this.getTwitchData.bind(this);
 		this.getNonTwitchData    = this.getNonTwitchData.bind(this);
 		this.getAllData          = this.getAllData.bind(this);
 		this.getAllNonTwitchData = this.getAllNonTwitchData.bind(this);
 		this.tabsHandler         = this.tabsHandler.bind(this);
-		this.updateFilter        = this.updateFilter.bind(this);
 	}
 
 	componentDidMount(){
 		this.getAllData();
-	}
-
-	updateFilter(streamType){	
-		this.setState({filter : streamType});
 	}
 
 	tabsHandler(event) {
@@ -48,7 +41,6 @@ class App extends React.Component {
 		this.setState({currentData : target.classList[0]});
 		if (target.classList[0] === "Twitch"){
 			this.setState({hideNavbar : true});
-			this.updateFilter("All");
 		} else {
 			this.setState({hideNavbar : false});
 		}
@@ -56,26 +48,40 @@ class App extends React.Component {
 
 	async getTwitchData() {
 		let data = await fetchData("/streams", "/featured");
-		for (let i = 0; i < data.featured.length; i++){
-      		let sortedData = sortTwitchData(data.featured[i]);
-      		const oldData = this.state.data;
-        	oldData["twitch"].push(sortedData);
-        	const newData = oldData;
-        	this.setState({data : newData});
-      	}
-	}
+		const extractedData = data.featured.map(x => ({
+				streamName : x.stream.channel.display_name,
+				streamTitle : x.stream.channel.status,
+				game : x.stream.channel.game,
+				screenshotLink : x.stream.preview.medium,
+				streamURL: x.stream.channel.url,
+				viewerCount : x.stream.viewers,
+				online : true
+			})
+		);
+		const newData = Object.assign({}, this.state.data);
+		newData["twitch"] = extractedData;
+		this.setState({data : newData});
+	};
 
 	async getNonTwitchData(streamerName, recommendedBy) {
 		let data =  await fetchData("/streams", "/" + streamerName);
 		if (data.stream === null) {
       		data = await fetchData("/channels", "/" + streamerName);
-      		/*Run a check for if the fetch was successful, maybe status before json()?*/     		
+      		if (data === false) {
+      			console.log(streamerName + " not found");
+      			return;
+      		}   		
       	}
       	const sortedData = sortNonTwitchData(data);
-        const oldData = this.state.data;
-        oldData[recommendedBy].push(sortedData);
-        const newData = oldData;
+        const newData = Object.assign({}, this.state.data);
+        newData[recommendedBy].push(sortedData);
         this.setState({data : newData});
+	}
+
+	getAllNonTwitchData(recommendedBy) {
+		for (let i = 0; i < this.state.streams[recommendedBy].length; i++){
+			this.getNonTwitchData(this.state.streams[recommendedBy][i], recommendedBy);
+		}
 	}
 
 	getAllData() {
@@ -88,13 +94,6 @@ class App extends React.Component {
 		this.getAllNonTwitchData("fcc")
 		this.getAllNonTwitchData("brad");
 		this.getTwitchData();
-	}
-
-
-	getAllNonTwitchData(recommendedBy) {
-		for (let i = 0; i < this.state.streams[recommendedBy].length; i++){
-			this.getNonTwitchData(this.state.streams[recommendedBy][i], recommendedBy);
-		}
 	}
 
   	render() {
@@ -110,9 +109,6 @@ class App extends React.Component {
         		<section className = "recommended-streams">
         			<Tabs handler = {this.tabsHandler}/>
         			<StreamsGallery 
-        				filterObj = {{updateFilter : this.updateFilter,
-        					filter : this.state.filter
-        				}} 
         				navbar = {this.state.hideNavbar} 
         				data = {this.state.data[this.state.currentData.toLowerCase()]}
         				currentData = {this.state.currentData}
