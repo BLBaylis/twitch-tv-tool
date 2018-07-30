@@ -7,6 +7,7 @@ import RefreshBtn from './RefreshBtn';
 import StreamsGallery from './StreamsGallery';
 import Tabs from './Tabs';
 import '../styles/App.scss';
+import {throttle, debouncer} from 'lodash-es';
 
 class App extends React.Component {
 	constructor(props) {
@@ -22,13 +23,13 @@ class App extends React.Component {
 				fcc   : []
 			},
 			currentData : "FCC",
-			retrievingData : false
 		};
 		this.getTwitchData       = this.getTwitchData.bind(this);
 		this.getNonTwitchData    = this.getNonTwitchData.bind(this);
 		this.getAllData          = this.getAllData.bind(this);
 		this.getAllNonTwitchData = this.getAllNonTwitchData.bind(this);
 		this.tabsHandler         = this.tabsHandler.bind(this);
+		this.dataThrottle        = throttle(this.getAllData.bind(this), 1000);
 	}
 
 	componentDidMount(){
@@ -86,18 +87,15 @@ class App extends React.Component {
 	}
 
 	async getAllData() {
-		if (this.state.retrievingData === true){
-			return;
-		}
 		this.setState({data : {      
 				brad  : [],
 				twitch: [], 
 				fcc   : []
 			},
-			retrievingData : true
 		});
-		await Promise.all([this.getAllNonTwitchData("fcc"), this.getAllNonTwitchData("brad"), this.getTwitchData()]);
-		this.setState({retrievingData : false});
+		this.getAllNonTwitchData("fcc");
+		this.getAllNonTwitchData("brad");
+		this.getTwitchData();
 	}
 
   	render() {
@@ -109,7 +107,7 @@ class App extends React.Component {
           			</h1>
         		</header>
         		<StreamerSearch/>
-        		<RefreshBtn refresh = {this.getAllData}/>
+        		<RefreshBtn refresh = {this.dataThrottle}/>
         		<section className = "recommended-streams">
         			<Tabs handler = {this.tabsHandler}/>
         			<StreamsGallery 

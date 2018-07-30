@@ -35,7 +35,7 @@ class StreamerSearch extends React.Component {
   				return;
   			}
   		}
-  		let newData = Object.assign({}, this.state.data);
+  		let newData = Object.assign([], this.state.data);
   		newData.push(sortNonTwitchData(search));
   		this.setState({data : newData, input : ""});
 
@@ -43,7 +43,7 @@ class StreamerSearch extends React.Component {
 
 	closeStream(event) {
 		const target = event.target;
-		let data = Object.assign({}, this.state.data);
+		let data = Object.assign([], this.state.data);
 		data = data.filter(x => x.streamName !== target.classList[0]);
 		this.setState({data});
 	}
