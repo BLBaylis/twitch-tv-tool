@@ -83,7 +83,8 @@ class App extends React.Component {
 				brad  : [],
 				twitch: [], 
 				fcc   : []
-			}});
+			}
+		});
 		this.getAllNonTwitchData("fcc")
 		this.getAllNonTwitchData("brad");
 		this.getTwitchData();
