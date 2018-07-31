@@ -22,7 +22,7 @@ class StreamerSearch extends React.Component {
   }
 
   async getSearchedStream(event) {
-  	const searchBar = document.getElementsByTagName("input")[0];
+    const searchBar = document.getElementsByTagName("input")[0];
     if (event.target === searchBar && event.keyCode !== 13) {
       return;
     }
@@ -81,21 +81,21 @@ class StreamerSearch extends React.Component {
       ) : null;
     return (
       <section className="streamer-search">
-      	<div className = "streamer-search--search-bar-wrapper">
-        	<input
-          		className="streamer-search--search-bar"
-          		onChange={this.updateInput}
-          		onKeyUp={this.getSearchedStream}
-          		type="search"
-          		placeholder="Streamer Name..."
-          		value={this.state.input}
-        	/>
-        	<button onClick = {this.getSearchedStream} className="streamer-search--search-button">
-        		<FontAwesomeIcon 
-        		icon="search"
-        		size = "2x"
-        		/>
-        	</button>
+        <div className="streamer-search--search-bar-wrapper">
+          <input
+            className="streamer-search--search-bar"
+            onChange={this.updateInput}
+            onKeyUp={this.getSearchedStream}
+            type="search"
+            placeholder="Streamer Name..."
+            value={this.state.input}
+          />
+          <button
+            onClick={this.getSearchedStream}
+            className="streamer-search--search-button"
+          >
+            <FontAwesomeIcon icon="search" size="2x" />
+          </button>
         </div>
         {searchResults}
       </section>
