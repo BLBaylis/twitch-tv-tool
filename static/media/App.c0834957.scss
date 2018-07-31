@@ -1,0 +1,24 @@
+.app {
+	text-align: center;
+	margin          : 0;
+	padding         : 0;
+	height          : 100%;
+	background-color: #fff;
+	font-family     : 'Roboto', sans-serif;
+	min-width       : 300px;
+}
+
+.app--header {
+  	margin : 2vh 0;
+}
+
+.app--title {
+	font-family: 'Press Start 2P', cursive;
+	font-size  : 30px;
+	margin     : 3vh auto;
+	color      : #6441a5;
+}
+
+.app--title__logo {
+	width : 100px;
+}

@@ -1,0 +1,103 @@
+.streamer-search {
+	width           : 95%;
+	margin          : 0 auto;
+	border          : none;
+	background-color: #fff;
+}
+
+.streamer-search--search-bar-wrapper {
+	display   : block;
+	width     : 100%;
+	margin    : 1vh auto;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+	transition: box-shadow 300ms ease-in-out;
+	border    : none;
+	float     : left;
+}
+
+.streamer-search--search-bar {
+	height      : 45px;
+	box-sizing  : border-box;
+	width       : 80%;
+	padding     : 0 21px; 
+	border      : solid 2px #6441a5;
+	border-right: none;
+	font-size   : 18px;
+	float       : left;
+	transition  : all 300ms ease-in-out;
+}
+
+.streamer-search--search-bar:hover {
+	border-color : #956dd7;
+}
+
+.streamer-search--search-bar-wrapper:hover {
+	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.streamer-search--search-button {
+	float           : left;
+	box-sizing      : border-box;
+	width           : 20%;
+	height          : 45px;
+	background-color: #6441a5;
+	color           : #eee;
+	border          : none;
+	transition      : all 300ms ease-in-out;
+}
+
+.streamer-search--search-button:hover {
+	background-color: #956dd7;
+}
+
+.streamer-search--search-results {
+	display              : grid;
+	padding              : 10px;
+	grid-gap             : 10px;
+	width                : 100%;
+	background-color     : #6441a5;
+	margin               : 1vh auto;
+	box-sizing           : border-box;
+	grid-auto-flow       : row dense;
+	grid-template-columns: minmax(240px, 1fr);
+}
+
+@media (min-width : 360px) {
+	
+	.streamer-search--search-results {
+		grid-template-columns : repeat(2, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 680px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(3, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1000px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(4, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1450px) {
+
+	.streamer-search--search-results {
+		grid-template-columns : repeat(5, minmax(150px, 1fr));
+	}
+
+}
+
+@media (min-width : 1600px) {
+	
+	.streamer-search--search-results {
+		grid-template-columns : repeat(auto-fit, minmax(150px, 1fr));
+	}
+
+}
