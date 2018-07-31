@@ -1,0 +1,38 @@
+@import 'heading';
+@import 'navbar';
+
+.streams-gallery {
+	width : 90%;
+	margin : 0 auto 5%;	
+	color : #fff;
+	border  :none;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background-color : #6441a5;
+}
+
+.streams--stream {
+	display : grid;
+	padding : 3vh;
+	grid-gap : 3vh;
+}
+
+.streams--stream__online {
+	@extend .streams--stream;
+	grid-template-columns : repeat(auto-fit, minmax(240px, 1fr));
+	padding-bottom : 1.5vh;
+}
+
+
+.streams--stream__offline {
+	@extend .streams--stream;
+	grid-template-columns : repeat(auto-fit, minmax(200px, 0.5fr));
+	padding-top : 1.5vh;
+}
+
+@media (min-width : 768px) {
+	
+	.streams--stream__online {
+		grid-template-columns : repeat(auto-fit, minmax(300px, 1fr));
+	}
+
+}

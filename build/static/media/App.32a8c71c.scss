@@ -1,0 +1,33 @@
+.app {
+  	text-align: center;
+ 	margin: 0;
+  	padding: 0;
+	height : 100%;
+	background-color : #fff;
+	font-family : /*'Roboto',*/ sans-serif;
+	min-width : 330px;
+}
+
+.app--header {
+  	margin : 2vh 0;
+}
+
+.app--title {
+  	font-family: 'Press Start 2P', cursive;
+	font-size : 35px;
+	margin : 3vh auto;
+	color : #6441a5;
+}
+
+.app--title__logo {
+	width : 15%;
+}
+
+.streams-gallery {
+	width : 90%;
+	margin : 0 auto 5%;	
+	color : #fff;
+	border  :none;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background-color : #6441a5;
+}
