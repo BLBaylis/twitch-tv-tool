@@ -1,12 +1,12 @@
 {
-  "main.js": "static/js/main.87726406.js",
-  "main.js.map": "static/js/main.87726406.js.map",
-  "static\\media\\App.scss": "static/media/App.32a8c71c.scss",
-  "static\\media\\RefreshBtn.scss": "static/media/RefreshBtn.1d7941fe.scss",
-  "static\\media\\StreamCard.scss": "static/media/StreamCard.08c8db6e.scss",
-  "static\\media\\StreamerSearch.scss": "static/media/StreamerSearch.6284a8e5.scss",
-  "static\\media\\StreamsGallery.scss": "static/media/StreamsGallery.9ffa7cfc.scss",
-  "static\\media\\Tabs.scss": "static/media/Tabs.e3d469ef.scss",
-  "static\\media\\index.scss": "static/media/index.9be9da2e.scss",
+  "main.js": "static/js/main.7169a85a.js",
+  "main.js.map": "static/js/main.7169a85a.js.map",
+  "static\\media\\App.scss": "static/media/App.c0834957.scss",
+  "static\\media\\RefreshBtn.scss": "static/media/RefreshBtn.35765e4a.scss",
+  "static\\media\\StreamCard.scss": "static/media/StreamCard.78d55459.scss",
+  "static\\media\\StreamerSearch.scss": "static/media/StreamerSearch.02518f93.scss",
+  "static\\media\\StreamsGallery.scss": "static/media/StreamsGallery.5fcbb735.scss",
+  "static\\media\\Tabs.scss": "static/media/Tabs.92f197b0.scss",
+  "static\\media\\index.scss": "static/media/index.6a4dae2f.scss",
   "static\\media\\twitch.svg": "static/media/twitch.48a5575f.svg"
 }
