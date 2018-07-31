@@ -3,6 +3,11 @@ import "../styles/StreamerSearch.scss";
 import fetchData from "../fetchData";
 import sortNonTwitchData from "../sortNonTwitchData";
 import StreamCard from "./StreamCard";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faSearch);
 
 class StreamerSearch extends React.Component {
   constructor(props) {
@@ -17,20 +22,20 @@ class StreamerSearch extends React.Component {
   }
 
   async getSearchedStream(event) {
-    const target = event.target;
-    if (event.keyCode !== 13) {
+  	const searchBar = document.getElementsByTagName("input")[0];
+    if (event.target === searchBar && event.keyCode !== 13) {
       return;
     }
     const streamNames = this.state.data.map(x => x.streamName);
-    if (streamNames.indexOf(target.value.toLowerCase()) !== -1) {
+    if (streamNames.indexOf(searchBar.value.toLowerCase()) !== -1) {
       this.setState({ input: "" });
       return;
     }
-    let search = await fetchData("/streams", "/" + target.value);
+    let search = await fetchData("/streams", "/" + searchBar.value);
     if (search.stream === null) {
-      search = await fetchData("/channels", "/" + target.value);
+      search = await fetchData("/channels", "/" + searchBar.value);
       if (search === false) {
-        console.log(target.value + " not found");
+        console.log(searchBar.value + " not found");
         this.setState({ input: "" });
         return;
       }
@@ -76,14 +81,22 @@ class StreamerSearch extends React.Component {
       ) : null;
     return (
       <section className="streamer-search">
-        <input
-          className="streamer-search--search-bar"
-          onChange={this.updateInput}
-          onKeyUp={this.getSearchedStream}
-          type="search"
-          placeholder="Search for a streamer..."
-          value={this.state.input}
-        />
+      	<div className = "streamer-search--search-bar-wrapper">
+        	<input
+          		className="streamer-search--search-bar"
+          		onChange={this.updateInput}
+          		onKeyUp={this.getSearchedStream}
+          		type="search"
+          		placeholder="Streamer Name..."
+          		value={this.state.input}
+        	/>
+        	<button onClick = {this.getSearchedStream} className="streamer-search--search-button">
+        		<FontAwesomeIcon 
+        		icon="search"
+        		size = "2x"
+        		/>
+        	</button>
+        </div>
         {searchResults}
       </section>
     );
