@@ -104,6 +104,7 @@ module.exports = {
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
   },
+
   module: {
     strictExportPresence: true,
     rules: [
@@ -213,7 +214,7 @@ module.exports = {
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           {
-            test: /\.css$/,
+            test: /\.scss$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
